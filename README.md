@@ -17,7 +17,7 @@ var through = require('through');
 var pbStream = require('pb-stream');
 
 var MyRequestMessage = require('./my-protocol').MyRequestMessage
-var MyResponseMessage = require('./my-protocol').MyRequestMessage
+var MyResponseMessage = require('./my-protocol').MyResponseMessage
 
 var decoder = pbStream.decoder(MyRequestMessage);
 var encoder = pbStream.encoder(MyResponseMessage);
@@ -30,7 +30,7 @@ net.createServer(function(socket) { //'connection' listener
           console.log(request.SomeProperty)
 
           //do some logic
-          var response = new MyRequestMessage({ foo: 'bar' });
+          var response = new MyResponseMessage({ foo: 'bar' });
 
           this.queue(response);
         })).pipe(encoder);
