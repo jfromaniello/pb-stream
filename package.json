@@ -1,0 +1,22 @@
+{
+  "name": "pb-stream",
+  "version": "1.0.0",
+  "description": "ProtoBuf.js stream serializers / deserializers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Jose F. Romaniello <jfromaniello@gmail.com> (http://joseoncode.com)",
+  "license": "MIT",
+  "dependencies": {
+    "bytebuffer": "~3.5.4",
+    "event-stream": "~3.3.0",
+    "xtend": "~4.0.0"
+  },
+  "devDependencies": {
+    "buffer-equal": "0.0.1",
+    "chai": "~2.2.0",
+    "mocha": "~2.2.4",
+    "protobufjs": "~4.0.0-b2"
+  }
+}

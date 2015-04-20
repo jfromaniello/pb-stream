@@ -1,0 +1,5 @@
+package pbstream;
+
+message Message {
+  required string Hello = 1;
+}
