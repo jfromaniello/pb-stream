@@ -1,5 +1,7 @@
 [ProtoBuf.js](https://github.com/dcodeIO/ProtoBuf.js/) stream encoder / decoder for varint32 length-delimited messages.
 
+Build awesome tcp servers by using industry standard [Protocol Buffers](https://developers.google.com/protocol-buffers)!
+
 ## Install
 
 ```
@@ -11,29 +13,31 @@ npm i pb-stream --save
 Use pb-stream to decode messages as follows:
 
 ```javascript
-var net = require('net');
-var through = require('through');
-
+var net      = require('net');
+var through  = require('through');
 var pbStream = require('pb-stream');
 
-var MyRequestMessage = require('./my-protocol').MyRequestMessage
-var MyResponseMessage = require('./my-protocol').MyResponseMessage
+var Protocol = require('./my-protocol')
 
-var decoder = pbStream.decoder(MyRequestMessage);
-var encoder = pbStream.encoder(MyResponseMessage);
+var decoder = pbStream.decoder(Protocol.MyRequestMessage);
+var encoder = pbStream.encoder(Protocol.MyResponseMessage);
+
+
+var process = through(function (request) {
+  //request has all properties
+  console.log(request.SomeProperty)
+
+  //do some logic
+  var response = new Protocol.MyResponseMessage({ foo: 'bar' });
+
+  this.queue(response);
+});
 
 net.createServer(function(socket) { //'connection' listener
-
+  //the magic:
   socket.pipe(decoder)
-        .pipe(through(function (request) {
-          //contains all properties
-          console.log(request.SomeProperty)
-
-          //do some logic
-          var response = new MyResponseMessage({ foo: 'bar' });
-
-          this.queue(response);
-        })).pipe(encoder);
+        .pipe(process)
+        .pipe(encoder);
 
 }).listen(8124, function () {
   console.log('server bound to localhost:8124');
