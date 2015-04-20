@@ -23,7 +23,7 @@ var decoder = pbStream.decoder(Protocol.MyRequestMessage);
 var encoder = pbStream.encoder(Protocol.MyResponseMessage);
 
 
-var process = through(function (request) {
+var handle = through(function (request) {
   //request has all properties
   console.log(request.SomeProperty)
 
@@ -36,7 +36,7 @@ var process = through(function (request) {
 net.createServer(function(socket) { //'connection' listener
   //the magic:
   socket.pipe(decoder)
-        .pipe(process)
+        .pipe(handle)
         .pipe(encoder);
 
 }).listen(8124, function () {
