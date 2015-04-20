@@ -19,13 +19,21 @@ var pbStream = require('pb-stream');
 var MyRequestMessage = require('./my-protocol').MyRequestMessage
 var MyResponseMessage = require('./my-protocol').MyRequestMessage
 
+var decoder = pbStream.decoder(MyRequestMessage);
+var encoder = pbStream.encoder(MyResponseMessage);
+
 net.createServer(function(socket) { //'connection' listener
 
-  socket.pipe(pbStream.decoder(MyRequestMessage))
+  socket.pipe(decoder)
         .pipe(through(function (request) {
+          //contains all properties
+          console.log(request.SomeProperty)
+
           //do some logic
-          this.queue(new MyRequestMessage({ foo: 'bar' }));
-        })).pipe(pbStream.encoder(MyResponseMessage));
+          var response = new MyRequestMessage({ foo: 'bar' });
+
+          this.queue(response);
+        })).pipe(encoder);
 
 }).listen(8124, function () {
   console.log('server bound to localhost:8124');
