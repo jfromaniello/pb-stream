@@ -18,5 +18,13 @@
     "chai": "~2.2.0",
     "mocha": "~2.2.4",
     "protobufjs": "~4.0.0-b2"
+  },
+  "homepage": "https://github.com/jfromaniello/pb-stream",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jfromaniello/pb-stream.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jfromaniello/pb-stream/issues"
   }
 }
