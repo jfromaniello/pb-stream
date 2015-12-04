@@ -9,7 +9,7 @@
   "author": "Jose F. Romaniello <jfromaniello@gmail.com> (http://joseoncode.com)",
   "license": "MIT",
   "dependencies": {
-    "through": "~2.3.7",
+    "through2": "~2.0.0",
     "xtend": "~4.0.0"
   },
   "devDependencies": {
